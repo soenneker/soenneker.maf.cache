@@ -44,7 +44,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Agents.AI" Version="1.0.0-rc3" />
-        <PackageReference Include="Soenneker.Dictionaries.Singletons" Version="4.0.21" />
+        <PackageReference Include="Soenneker.Dictionaries.Singletons" Version="4.0.22" />
         <PackageReference Include="Soenneker.Maf.Dtos.Options" Version="4.0.4" />
     </ItemGroup>
 </Project>
