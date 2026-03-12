@@ -27,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Soenneker.Maf.Cache.csproj" />
+        <ProjectReference Include="..\..\src\Soenneker.Maf.Cache\Soenneker.Maf.Cache.csproj" />
     </ItemGroup>
 
     <ItemGroup>
