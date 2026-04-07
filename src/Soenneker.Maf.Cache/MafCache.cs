@@ -30,7 +30,8 @@ public sealed class MafCache : IMafCache
 
         _logger.LogInformation("Creating a new AIAgent instance for id ({Id}), model ({ModelId})...", id, options.ModelId);
 
-        AIAgent agent = await options.AgentFactory(options, cancellationToken).NoSync();
+        AIAgent agent = await options.AgentFactory(options, cancellationToken)
+                                     .NoSync();
 
         _logger.LogDebug("AIAgent instance ({Id}) has been initialized", id);
         return agent;
@@ -44,7 +45,7 @@ public sealed class MafCache : IMafCache
         return _agents.Get(id, options, cancellationToken);
     }
 
-    public ValueTask Remove(string id, CancellationToken cancellationToken = default)
+    public ValueTask<bool> Remove(string id, CancellationToken cancellationToken = default)
     {
         _logger.LogInformation("Removing AIAgent instance ({Id})...", id);
         return _agents.Remove(id, cancellationToken);

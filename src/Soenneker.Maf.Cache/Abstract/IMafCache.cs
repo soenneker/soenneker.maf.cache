@@ -19,7 +19,7 @@ public interface IMafCache
     /// <summary>
     /// Removes an agent instance from the cache.
     /// </summary>
-    ValueTask Remove(string id, CancellationToken cancellationToken = default);
+    ValueTask<bool> Remove(string id, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Clears all cached agent instances.
