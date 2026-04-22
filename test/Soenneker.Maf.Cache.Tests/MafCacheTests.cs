@@ -1,20 +1,19 @@
 using Soenneker.Maf.Cache.Abstract;
-using Soenneker.Tests.FixturedUnit;
-using Xunit;
+using Soenneker.Tests.HostedUnit;
 
 namespace Soenneker.Maf.Cache.Tests;
 
-[Collection("Collection")]
-public sealed class MafCacheTests : FixturedUnitTest
+[ClassDataSource<Host>(Shared = SharedType.PerTestSession)]
+public sealed class MafCacheTests : HostedUnitTest
 {
     private readonly IMafCache _util;
 
-    public MafCacheTests(Fixture fixture, ITestOutputHelper output) : base(fixture, output)
+    public MafCacheTests(Host host) : base(host)
     {
         _util = Resolve<IMafCache>(true);
     }
 
-    [Fact]
+    [Test]
     public void Default()
     {
 
