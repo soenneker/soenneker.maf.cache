@@ -25,10 +25,5 @@
     <ItemGroup>
         <ProjectReference Include="..\..\src\Soenneker.Maf.Cache\Soenneker.Maf.Cache.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-        <Content Include="testconfig.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
 </Project>
+
