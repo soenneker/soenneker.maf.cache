@@ -13,17 +13,29 @@ Provides async thread-safe caching of Microsoft Agent Framework `AIAgent` instan
 dotnet add package Soenneker.Maf.Cache
 ```
 
-## Quick start
+## Usage
 
 ```csharp
-using Soenneker.Maf.Cache.Registrars;
 using Microsoft.Extensions.DependencyInjection;
+using Soenneker.Maf.Cache.Abstract;
+using Soenneker.Maf.Cache.Registrars;
+using Soenneker.Maf.Dtos.Options;
 
-var services = new ServiceCollection();
-var result = services.AddMafCacheAsSingleton();
+services.AddMafCacheAsSingleton();
+
+IMafCache cache = serviceProvider.GetRequiredService<IMafCache>();
+
+var options = new MafOptions
+{
+    ModelId = "my-model",
+    AgentFactory = static (value, cancellationToken) =>
+        CreateAgentAsync(value.ModelId!, cancellationToken)
+};
+
+AIAgent agent = await cache.Get("support-agent", options, cancellationToken);
 ```
 
-Adds `IMafCache` as a singleton service.
+Calls using the same id share one agent. The options and factory are used when that id is first created; remove the entry before recreating it with different options.
 
 ## What you get
 
@@ -43,5 +55,6 @@ Adds `IMafCache` as a singleton service.
 
 ## Practical notes
 
-- Cancellation stops pending work; it does not undo work that has already completed.
-- Calls that return a cached or singleton value reuse the same instance until the owning service is disposed.
+- Register the cache as a singleton to share agents across scopes, or use `AddMafCacheAsScoped()` to isolate them per scope.
+- `Remove()` and `Clear()` remove cached agents; callers should not retain an agent after removing it.
+- `GetAll()` returns a snapshot keyed by the ids passed to `Get()`.
