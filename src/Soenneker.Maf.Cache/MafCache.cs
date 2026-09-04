@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Soenneker.Maf.Cache;
 
+/// <inheritdoc cref="IMafCache" />
 public sealed class MafCache : IMafCache
 {
     private readonly ILogger<MafCache> _logger;
