@@ -33,7 +33,8 @@ public sealed class MafCache : IMafCache
         AIAgent agent = await options.AgentFactory(options, cancellationToken)
                                      .NoSync();
 
-        _logger.LogDebug("AIAgent instance ({Id}) has been initialized", id);
+        if (_logger.IsEnabled(LogLevel.Debug))
+            _logger.LogDebug("AIAgent instance ({Id}) has been initialized", id);
         return agent;
     }
 
